@@ -1,0 +1,20 @@
+name: Five-hour window message
+
+on:
+  schedule:
+    # UTC+8: 08:00, 13:02, 18:04, 23:06
+    - cron: "0 0 * * *"
+    - cron: "2 5 * * *"
+    - cron: "4 10 * * *"
+    - cron: "6 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  emit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Emit the scheduled message
+        run: printf '%s\n' '你好，五小时窗口已激活，欢迎继续使用~'
